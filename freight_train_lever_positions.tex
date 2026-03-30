@@ -1,0 +1,100 @@
+%!TEX TS-program = pdflatexmk
+
+% Copyright 2021 Martin Scheidt (Attribution 4.0 International, CC-BY 4.0)
+% You are free to copy and redistribute the material in any medium or format. You are free to remix, transform, and build upon the material for any purpose, even commercially. You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits. No warranties are given.
+
+\documentclass{beamer}
+\usepackage[
+  size=a4,
+]{beamerposter}
+\beamertemplatenavigationsymbolsempty
+
+\def\ROOT{./..}
+
+\usepackage{material}
+\input{\ROOT/handbook/figures/signal_aspects.tikz}
+
+\newlength{\trainlength}\setlength{\trainlength}{20cm}
+\newlength{\trainheight}\setlength{\trainheight}{3cm}
+\newlength{\trainwidth}\setlength{\trainwidth}{4cm}
+
+\tikzset{
+  lever_positions/.pic={
+    \draw[->,>=latex,line width=1.5pt,green] ( 1.5,0)  .. controls ( 2,-0.5) and ( 3,-0.5) .. ( 3.5,0);
+    \draw[->,>=latex,line width=1.5pt,green] ( 4.5,0)  .. controls ( 5,-0.5) and ( 6,-0.5) .. ( 6.5,0);
+    \draw[->,>=latex,line width=1.5pt,green] ( 7.5,0)  .. controls ( 8,-0.5) and ( 9,-0.5) .. ( 9.5,0);
+    \draw[->,>=latex,line width=1.5pt,green] (10.5,0)  .. controls (11,-0.5) and (12,-0.5) .. (12.5,0);
+    \draw[->,>=latex,line width=1.5pt,green] (13.5,0)  .. controls (14,-0.5) and (15,-0.5) .. (15.5,0);
+    %
+    \draw[<-,>=latex,line width=1.5pt,green] ( 1.5,2)  .. controls ( 2,2.5) and ( 3,2.5) .. ( 3.5,2);
+    \draw[<-,>=latex,line width=1.5pt,green] ( 4.5,2)  .. controls ( 5,2.5) and ( 6,2.5) .. ( 6.5,2);
+    \draw[<-,>=latex,line width=1.5pt,green] ( 7.5,2)  .. controls ( 8,2.5) and ( 9,2.5) .. ( 9.5,2);
+    \draw[<-,>=latex,line width=1.5pt,green] (10.5,2)  .. controls (11,2.5) and (12,2.5) .. (12.5,2);
+    \draw[<-,>=latex,line width=1.5pt,green] (13.5,2)  .. controls (14,2.5) and (15,2.5) .. (15.5,2);
+    % lever positiions
+    \foreach \x in {0,6,12,15}
+      \draw [fill=white] (\x,0) rectangle ++(2,2);
+    \foreach \x in {3,9} {
+      \draw [fill=white] (\x,1.1) rectangle ++(2,0.9);
+      \draw [fill=white] (\x,0  ) rectangle ++(2,0.9);
+    };
+    % labels
+    \node[align=center] at ( 1,1.6) {\si{\kilo\metre\per\hour}};
+    \node[align=center] at ( 1,1  ) {\Huge $0$};
+    \node[align=center] at ( 1,0.3) {\Large \color{blue} $0$
+      \IfLanguage{english}{fields}
+      \IfLanguage{ngerman}{Felder}
+    };
+    \node[align=center] at ( 4,0.5) {\Large \color{blue} $0$
+      \IfLanguage{english}{fields}
+      \IfLanguage{ngerman}{Felder}
+    };
+    \node[align=center] at ( 4,1.5) {\Large \color{blue} $1$
+      \IfLanguage{english}{field}
+      \IfLanguage{ngerman}{Feld}
+    };
+    \node[align=center] at ( 7,1.6) {\si{\kilo\metre\per\hour}};
+    \node[align=center] at ( 7,1  ) {\Huge $40$};
+    \node[align=center] at ( 7,0.3) {\Large \color{blue} $1$
+      \IfLanguage{english}{field}
+      \IfLanguage{ngerman}{Feld}
+    };
+    \node[align=center] at (10,0.5) {\Large \color{blue} $1$
+      \IfLanguage{english}{field}
+      \IfLanguage{ngerman}{Feld}
+    };
+    \node[align=center] at (10,1.5) {\Large \color{blue} $2$
+      \IfLanguage{english}{fields}
+      \IfLanguage{ngerman}{Felder}
+    };
+    \node[align=center] at (13,1.6) {\si{\kilo\metre\per\hour}};
+    \node[align=center] at (13,1  ) {\Huge $80$};
+    \node[align=center] at (13,0.3) {\Large \color{blue} $2$
+      \IfLanguage{english}{fields}
+      \IfLanguage{ngerman}{Felder}
+    };
+    \node[align=center] at (16,1.6) {\si{\kilo\metre\per\hour}};
+    \node[align=center] at (16,1  ) {\Huge $120$};
+    \node[align=center] at (16,0.3) {\Large \color{blue} $3$
+      \IfLanguage{english}{fields}
+      \IfLanguage{ngerman}{Felder}
+    };
+  };
+}
+
+\begin{document}
+  \selectlanguage{ngerman} % currently supported: english, ngerman
+  \tikzset{every path/.style={ultra thick}}
+  \begin{frame}
+    \IfLanguage{english}{\Huge \textcolor{blue}{Control Lever:}}
+    \IfLanguage{ngerman}{\Huge \textcolor{blue}{Schalthebelpositionen:}}\\
+    \begin{tikzpicture}[font=\sffamily]
+      \begin{scope}[scale=1.5,transform shape]
+        \pic at (0,0) {lever_positions};
+     \end{scope}
+    \end{tikzpicture}
+    \vfill\input{\ROOT/handbook/tables/game_procedure.tex}
+    \input{\ROOT/handbook/frontmatter/copyright.tex}
+    \input{\ROOT/handbook/backmatter/versionhistory.tex}
+  \end{frame}
+\end{document}
